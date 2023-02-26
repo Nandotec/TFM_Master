@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>XSS 1</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body style="height:745px">
+    <div class="container">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
+      <a href="#" class="navbar-brand mb-0 h1">
+        <img class="d-inline m-2 align-top" src="https://aula.campusciberseguridad.com/pluginfile.php?file=%2F1%2Ftheme_moove%2Flogo%2F1671714533%2Fciberseguridad%20vertical%20bicolor%281%29.png" width="30" height="30">
+      </a>
+      <button type="button" data-bs-toggle="collapse" data-bs-target="#barraNavegacion" class="navbar-toggler m-2" aria-controls="barraNavegacion" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="barraNavegacion">
+        <ul class="navbar-nav">
+          <li class="nav-item active m-2">
+            <a href="/" class="nav-link active">
+              Home
+            </a>
+          </li>
+          <li class="nav-item dropdown m-2">
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Fugas de Información
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="/fugas1" class="dropdown-item">Prueba 1</a></li>
+                <li><a href="/fugas2" class="dropdown-item">Prueba 2</a></li>
+                <li><a href="/fugas3" class="dropdown-item">Prueba 3</a></li>
+                <li><a href="/fugas4" class="dropdown-item">Prueba 4</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown m-2">
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              SQLi
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="/SQLi1" class="dropdown-item">Prueba 1</a></li>
+                <li><a href="/SQLi2" class="dropdown-item">Prueba 2</a></li>
+                <li><a href="/SQLi3" class="dropdown-item">Prueba 3</a></li>
+                <li><a href="/SQLi4" class="dropdown-item">Prueba 4</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown m-2">
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              XSS
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="/XSS1" class="dropdown-item">Prueba 1</a></li>
+                <li><a href="/XSS2" class="dropdown-item">Prueba 2</a></li>
+                <li><a href="/XSS3" class="dropdown-item">Prueba 3</a></li>
+                <li><a href="/XSS4" class="dropdown-item">Prueba 4</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown m-2">
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              CSRF
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="/CSRF1" class="dropdown-item">Prueba 1</a></li>
+                <li><a href="/CSRF2" class="dropdown-item">Prueba 2</a></li>
+                <li><a href="/CSRF3" class="dropdown-item">Prueba 3</a></li>
+                <li><a href="/CSRF4" class="dropdown-item">Prueba 4</a></li>
+            </ul>
+          </li>
+          <!-- Para agregar una nueva vulnerabilidad, copiar y pegar este segmento (borrar <li> de mas para el numero de ejercicios necesarios)
+          <li class="nav-item dropdown m-2">
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              CSRF
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="/Vuln1" class="dropdown-item">Prueba 1</a></li>
+                <li><a href="/Vuln2" class="dropdown-item">Prueba 2</a></li>
+                <li><a href="/Vuln3" class="dropdown-item">Prueba 3</a></li>
+                <li><a href="/Vuln4" class="dropdown-item">Prueba 4</a></li>
+            </ul>
+          </li> 
+          -->
+        </ul>
+      </nav>
+    </div>
+    <div class="container overflow-hidden" style="height:670px;">
+      <div class="float-child" id="divEjercicio">
+        <button id="btnPistas" type="button" class="btn btn-dark text-center m-2" data-bs-toggle="modal" data-bs-target="#modalPistas">
+          Pistas
+        </button>
+        <p class="text-center m-2" style="font-size: 20px ; font-weight: bold">
+          <b>Ejercicio</b>
+        </p>
+        <p class="text-center m-2">
+          Acertijo o descripcion del ejercicio aqui.
+        </p>  
+        <!--HTML especifico al ejercicio, en caso de ser necesario, borrar esta linea al agregar o completar-->
+
+        <!-- Modal de las Pistas -->
+        <div class="modal fade" id="modalPistas" tabindex="-1" role="dialog" aria-labelledby="modalPistasLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalPistasLabel">Pistas</h5>
+              </div>
+              <div class="modal-body">
+                <p class="text-center m-2">
+                  Resalta con tu cursor la fila de la pista que deseas ver, las pistas estan ordenadas por impacto de menor a mayor (arriba a abajo correspondientemente) para obtener la respuesta. Cuidado a los que desean usar la menor cantidad de pistas posibles que estas tambien estan disponibles sin ocultar dentro del Modal en el codigo fuente de la pagina.
+                </p>
+                <p class="text-center m-2 bg-dark">
+                  Pista 1:
+                </p>
+                <p class="text-center m-2 bg-dark">
+                  Pista 2:
+                </p>
+                <p class="text-center m-2 bg-dark">
+                  Pista 3:
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-block float-child overflow-hidden" id="divRespuesta">
+        <form id="fRespuesta" action="XSS1" class="text-center p-2" method="post" style="position: relative; top: 15%">
+          <label for="iRespuesta" class="form-label"><b>Respuesta</b></label>
+          <input type="text" class="form-control me-2 text-center" id="iRespuesta" name="iRespuesta" placeholder="Ingresa la clave...">
+          <label class="control-label text-danger" for="iRespuesta">{% for error in get_flashed_messages(category_filter=["error"])%}{{error}}{% endfor %}</label>
+          <br><br>
+          <button type="submit" class="btn btn-dark">Enviar</button>
+        </form>
+        <p class="text-center" style="margin: 20px; position: relative; top:10%">{% for ayuda in get_flashed_messages(category_filter=["ayuda"])%}{{ayuda}}{% endfor %}<p>
+
+      </div>
+      <div class="float-child overflow-hidden" id="divRecompensa">
+        <p class="text-center m-2">
+          <b>Recompensa</b>
+        </p>
+        <p class="text-center">
+          <img class="d-inline m-4 align-top" src="{{ url_for('static', filename=chest) }}" width="50%" height="50%">
+        </p>
+        {% for recompensa in get_flashed_messages(category_filter=["recompensa"])%}
+        <p class="text-center text-success" style="margin: 10px">
+          <b>{{recompensa}}</b>
+          <!-- Modal del Contexto -->
+          <div class="modal fade" id="modalContexto" tabindex="-1" role="dialog" aria-labelledby="modalContextoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalContextoLabel">Detalle del Contexto</h5>
+                </div>
+                <div class="modal-body">
+                  <p class="text-center m-2">
+                    Texto del nuevo parrafo de contexto aqui.
+                  </p>
+                  <p class="text-center m-2">
+                    <b>Suerte en los demas ejercicios, y no olvides anotar tu pieza :)</b>
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p>
+        <div style="display:flex; justify-content: center;">
+          <button id="btnContexto" type="button" class="btn btn-success text-center m-2" data-bs-toggle="modal" data-bs-target="#modalContexto">
+            Detalle
+          </button>
+        </div>
+          {% endfor %}
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>

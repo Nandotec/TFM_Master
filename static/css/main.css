@@ -1,0 +1,43 @@
+#divEjercicio{
+	float: left;
+	height: 100%;
+	width: 75%;
+	border: 10px solid gray;
+	border-right-width: 5px;
+	margin-top: 1px; 
+	background-color: #f2f2f3;
+	position:relative
+}
+
+#btnPistas{
+	position:absolute;
+	bottom:0px;
+	right: 0px
+}
+
+#divRespuesta{
+	float: left;
+	height:50%;
+	width: 25%;
+	border: 10px solid gray;
+	border-left-width: 5px;
+	border-bottom-width: 5px;
+	margin-top: 1px;
+	background-color: #f2f2f3
+}
+
+#divRecompensa{
+	float: left;
+	height:50%;
+	width: 25%;
+	border: 10px solid gray;
+	border-left-width: 5px;
+	border-top-width: 5px;
+	background-color: #f2f2f3;
+	position: relative;
+}
+
+#btnContexto{
+	position:absolute;
+	bottom:0px;
+}
