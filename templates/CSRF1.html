@@ -74,9 +74,8 @@
           <b>Ejercicio</b>
         </p>
         <p class="text-center m-2">
-          "'¿Pudiste encontrar la respuesta a aquel acertijo?',  le pregunto Rodrigo a Rafael. 'No, parece que solamente el administrador puede ver la respuesta, pero no pude adivinar la contraseña. Si escuche que el usuario sigue siendo el incluido por defecto.'"
+          "En este ejercicio, tu mision es cambiar la contraseña del usuario admin por medio de un ataque CSRF. La única información que tendrás para empezar, es el usuario guest y su contraseña, el usuario admin y contraseña, y conocimiento del hecho que admin no tiene acceso al formulario de cambio de contraseña al iniciar sesión."
         </p>
-        <br>
         {% for session in get_flashed_messages(category_filter=["session"])%}
         <p class="text-center m-2">
           <b>Sesion Activa: {{session}}</b>
@@ -90,7 +89,10 @@
         {% for display in get_flashed_messages(category_filter=["display"])%}
           {% if display == "login" %}
             <p class="text-center m-2" style="font-size: 12px;">
-              <i>Se ha creado un usuario, de nombre <b>guest</b> y contraseña <b>{% for guestpwd in get_flashed_messages(category_filter=["guestpwd"])%}{{guestpwd}}{% endfor %}</b>, para uso general.</i>
+              <i>El usuario <b>guest</b> tiene contraseña: <b>{% for guestpwd in get_flashed_messages(category_filter=["guestpwd"])%}{{guestpwd}}{% endfor %}</b></i>
+            </p>
+            <p class="text-center m-2" style="font-size: 12px;">
+              <i>El usuario <b>admin</b> tiene contraseña: <b>{% for adminpwd in get_flashed_messages(category_filter=["adminpwd"])%}{{adminpwd}}{% endfor %}</b></i>
             </p>
             <div>
             <form id="fLogin" action="CSRF1" class="text-center p-2" method="post" style="position: relative; top: 15%">
@@ -104,7 +106,7 @@
             </form>
           </div>
 
-          {% else %}
+          {% elif display == "change" %}
           <div>
             <form id="fCambio" action="CSRF1" class="text-center p-2" method="post" style="position: relative; top: 15%">
               <label for="iCambio" class="form-label"><b>Nueva contraseña</b></label>
@@ -114,11 +116,19 @@
             </form>
             <form id="fLogout" action="CSRF1" class="text-center p-2" method="post" style="position: relative; top: 15%">
               <input type="text" class="form-control me-2 text-center" id="iLogout" name="iLogout" value="logout" hidden>
-              <button type="submit" class="btn btn-danger">Logout</button>
+              <button type="submit" class="btn btn-danger">Cerrar sesion</button>
             </form>
           </div>
+          {% else %}
+            <div>
+              <form id="fLogout" action="CSRF1" class="text-center p-2" method="post" style="position: relative; top: 15%">
+                <input type="text" class="form-control me-2 text-center" id="iLogout" name="iLogout" value="logout" hidden>
+                <button type="submit" class="btn btn-danger">Cerrar sesion</button>
+              </form>
+            </div>
             {% for clave in get_flashed_messages(category_filter=["clave"])%}
-              <p class="text-center m-2 text-danger" >
+          
+              <p class="text-center m-2 text-success" >
                 <b>{{clave}}</b>
               </p>
             {% endfor %}
@@ -138,13 +148,13 @@
                   Resalta con tu cursor la fila de la pista que deseas ver, las pistas estan ordenadas por impacto de menor a mayor (arriba a abajo correspondientemente) para obtener la respuesta. Cuidado a los que desean usar la menor cantidad de pistas posibles que estas tambien estan disponibles sin ocultar dentro del Modal en el codigo fuente de la pagina.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 1: ¿Sabias que la mayoría de los routers vienen de fabrica con un cierto nombre de usuario por defecto? Creo que el <b>admin</b>istrador la conoce.
+                  Pista 1: El usuario guest si puede cambiar su contraseña, esto podría ser importante.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 2: Sí no puedo adivinar su contraseña, podría cambiarla...
+                  Pista 2: Al cambiar la contraseña de guest, la URL parece cambiar apreciablemente...
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 3: Ayer cambie mi contraseña, y la URL parecio crecer sustancialmente...
+                  Pista 3: Talvez estando dentro de admin...
                 </p>
               </div>
               <div class="modal-footer">
