@@ -94,7 +94,7 @@
                   Pista 2: Realmente no se deberia incluir validaciones en el frontend si se puede evitar...
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 3: Hay una razon por la cual el JavaScript se suele separar del HTML...
+                  Pista 3: Hay una razon por la cual el JavaScript se suele separar del HTML cuando el diseño lo permite...
                 </p>
               </div>
               <div class="modal-footer">
@@ -136,15 +136,18 @@
                 </div>
                 <div class="modal-body">
                   <p class="text-center m-2">
-                    En la practica, es normal encontrar que el HTML no incluya directamente scripts, cuando se pueden en su lugar enlazar por medio de una referencia al fichero correspondiente de JavaScript, alejando la mayor cantidad posible del comportamiento del sitio de los ojos del que busca modificar su funcionamiento.
+                    En la practica, es normal encontrar que el HTML no incluya directamente scripts (excepto que sean cosas pequeñas que no manejan datos sensibles) cuando se pueden en su lugar enlazar por medio de una referencia al fichero correspondiente de JavaScript, alejando la mayor cantidad posible del comportamiento del sitio de los ojos del que busca modificar su funcionamiento.
                   </p>
                   <p class="text-center m-2">
-                    En este caso, el script esta directamente en el codigo fuente de la pagina y como consecuencia, una persona que es capaz de entender a nivel basico como funciona una validacion en programacion, puede identificar el valor que se usa para la validacion.
+                    En este caso, el script esta directamente en el codigo HTML de la pagina y como consecuencia, una persona que es capaz de entender a nivel basico como funciona una validacion en programacion, puede identificar el valor que se usa para la validacion.
                   </p>
                   <p class="text-center m-2">
-                    Es una buena practica que emplear entonces la de separar cada elemento como HTML, CSS, JavaScript o Bases de datos en sus lugares correspondientes y solo hacer referencia a ellos cuando es necesario.
+                    Es una buena practica que emplear entonces la de separar cada elemento como HTML, CSS, JavaScript o Bases de datos en sus lugares correspondientes y solo hacer referencia a ellos cuando es necesario (a menos que el diseño permite elementos pequeños incluidos, de nuevo)
                   </p>
                   <p class="text-center m-2">
+                    <b>En cuanto a una implementación segura, la manera en la que funcionan los botones de enviar para validar la clave de cada uno de estos ejercicios es un ejemplo decente de la misma funcionalidad vulnerable en esta página siendo integrada de manera más segura. Todas las validaciones se realizan en el backend, sin dar más información de la necesaria al frontend. De lo contrario, simplemente incluir el mismo comportamiento del script, pero haciendo referencia a el desde un fichero aparte sería más seguro que la implementación actual.</b>
+                  </p>
+                  <p class="text-center m-2  text-success">
                     <b>Suerte en los demas ejercicios, y no olvides anotar tu pieza :)</b>
                   </p>
                 </div>

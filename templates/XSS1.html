@@ -74,10 +74,28 @@
           <b>Ejercicio</b>
         </p>
         <p class="text-center m-2">
-          Acertijo o descripcion del ejercicio aqui.
+          Usando un ataque de XSS Reflejado (Reflected), obten la clave recuperando el valor del elemento iEscondido oculto en esta página.
         </p>
-        
+        <p class="text-center m-2">
+          <i> Recomendamos fuertemente leer la primera pista, pero no lo forzamos. Creemos que podria ahorrar tiempo sustancial en pruebas redundantes.</i> 
+        <p class="text-center m-2">
+          <b>Condicion adicional: No ver codigo fuente de la pagina para resolver este ejercicio.</b>
+        </p>
         <!--HTML especifico al ejercicio, en caso de ser necesario, borrar esta linea al agregar o completar-->
+
+        <div>
+          <form id="fHola" action="javascript:void(0);" class="text-center p-2" method="post" style="position: relative; top: 15%">
+            <label for="iHola" class="form-label text-success"><b>Hola! Siento que eres joven, cuantos años tienes?</b></label>
+            <input type="text" class="form-control me-2 text-center" id="iHola" name="iHola" placeholder="Ingresa tu nombre aqui..." required>
+            <br>
+            <button id="bHola" type="button" class="btn btn-dark" onclick="displayShow()">Saludar</button>
+          </form>
+        </div>
+
+        <p id="pHola" class="text-center m-2 text-success" style="font-weight: bold;"></p>
+
+        <input id="iEscondido" value="la clave es a684eceee76fc522773286a895bc8436" hidden>
+
 
         <!-- Modal de las Pistas -->
         <div class="modal fade" id="modalPistas" tabindex="-1" role="dialog" aria-labelledby="modalPistasLabel" aria-hidden="true">
@@ -91,13 +109,13 @@
                   Resalta con tu cursor la fila de la pista que deseas ver, las pistas estan ordenadas por impacto de menor a mayor (arriba a abajo correspondientemente) para obtener la respuesta. Cuidado a los que desean usar la menor cantidad de pistas posibles que estas tambien estan disponibles sin ocultar dentro del Modal en el codigo fuente de la pagina.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 1:
+                  Pista 1: HTML5 no permite que ingrese en ninguna manera el tag de &lt;script&gt; al documento, así que cualquier idea que tenías de usar ese tag de elemento, puedes probar lo mismo pero sin &lt;script&gt; ni &lt;/script&gt;.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 2:
+                  Pista 2: alert() es una funcion de JavaScript que hace un popup en la pagina de lo que viene dentro del parentesis.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 3:
+                  Pista 3: Recomendamos investigar como obtener el valor de un elemento en base a su atributo de id.
                 </p>
               </div>
               <div class="modal-footer">
@@ -137,9 +155,18 @@
                 </div>
                 <div class="modal-body">
                   <p class="text-center m-2">
-                    Texto del nuevo parrafo de contexto aqui.
+                    Redactar el contexto de este ejercicio fue muy dificil, puesto que tuvimos que evolucionarlo y deevolucionarlo en algunos aspectos para acomodarse a la situacion con HTML5. En el pasado, como se puede ver con herramientas como DVWA, un ejemplo estandar seria mandar un &lt;script&gt; con un alert para mandar un mensaje arbitrario en la forma de un popup. Sin embargo, en HTML5, los tags de &lt;script&gt; se obvian automaticamente como protocolo de seguridad, osea que en implementaciones modernas esta vulnerabilidad clasica no es aplicable. 
                   </p>
                   <p class="text-center m-2">
+                    Como se habran dado cuenta, a menos que hayan usado un metodo alternativo al clasico, y habiendo leido la primera pista, habilitamos este ejercicio para simular el comportamiento del clasico, obligando a que se evalue lo que el usuario ingresa (motivo por el cual escogimos un input numerico), y razon por la cual la primera pista dice que simplemente se obvie el script, porque cubrimos esa necesidad por nuestro lado. Nuestro ejemplo en consecuencia es: <b>alert(document.getElementById("iEscondido").value)</b>
+                  </p>
+                  <p class="text-center m-2">
+                    Estamos seguros que no hace falta indicar que este no es comportamiento tipico para la vulnerabilidad, y en la mayoria de los contextos, ahora deberia ser una vulnerabilidad del pasado, pero puede afectar navegadores sin debida proteccion o en versiones mas antiguas.
+                  </p>
+                  <p class="text-center m-2">
+                    <b>Con todo lo anterior como consideracion, la mejor medida primero seria simplemente no tratar de buscar deshabilitar la seguridad intrinseca con la que HTML5 ya cuenta por defecto. Adicionalmente, si realmente hiciera falta, recordamos como mencionamos en fugas de informacion que no hay buen motivo para incluir javascript con informacion sensible dentro del HTML. Finalmente, como ultima capa seria asegurar que la respuesta que se prepara con el input, estuviera completamente escapada y se comportara por completo como una cadena de caracteres, para evitar introducir funcionalidad inesperada.</b>
+                  </p>
+                  <p class="text-center m-2 text-success">
                     <b>Suerte en los demas ejercicios, y no olvides anotar tu pieza :)</b>
                   </p>
                 </div>
@@ -159,5 +186,12 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script>
+      function displayShow() { 
+         var element = document.getElementById("pHola");
+         element.innerHTML = eval(document.getElementById("iHola").value)
+         element.append("? Lo sabia, si que eres joven! :D")
+      }   
+    </script>
   </body>
 </html>

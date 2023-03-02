@@ -74,9 +74,28 @@
           <b>Ejercicio</b>
         </p>
         <p class="text-center m-2">
-          Acertijo o descripcion del ejercicio aqui.
-        </p>  
-        <!--HTML especifico al ejercicio, en caso de ser necesario, borrar esta linea al agregar o completar-->
+          Usando un ataque de XSS Reflejado (Reflected), obten la clave recuperando el valor del elemento iEscondido oculto en esta página.
+        </p>
+        <p class="text-center m-2">
+          <b>Condicion adicional: No ver codigo fuente de la pagina para resolver este ejercicio.</b>
+        </p> 
+
+        <div>
+          <form id="fHola" action="XSS2" class="text-center p-2" method="post" style="position: relative; top: 15%">
+            <label for="iHola" class="form-label text-success"><b>Hola, me llamo mundo y tu?</b></label>
+            <input type="text" class="form-control me-2 text-center" id="iHola" name="iHola" placeholder="Ingresa tu nombre aqui..." required>
+            <br>
+            <button type="submit" class="btn btn-dark">Enviar</button>
+          </form>
+        </div>
+        
+        {% for hola in get_flashed_messages(category_filter=["hola"])%}
+          <p class="text-center m-2 text-success" >
+            <b>Mucho gusto {{holaM|safe}}, espero tengas un excelente día!</b>
+          </p>
+        {% endfor %}
+
+        <input id="iEscondido" value="la clave es d72d187df41e10ea7d9fcdc7f5909205" hidden>
 
         <!-- Modal de las Pistas -->
         <div class="modal fade" id="modalPistas" tabindex="-1" role="dialog" aria-labelledby="modalPistasLabel" aria-hidden="true">
@@ -90,13 +109,13 @@
                   Resalta con tu cursor la fila de la pista que deseas ver, las pistas estan ordenadas por impacto de menor a mayor (arriba a abajo correspondientemente) para obtener la respuesta. Cuidado a los que desean usar la menor cantidad de pistas posibles que estas tambien estan disponibles sin ocultar dentro del Modal en el codigo fuente de la pagina.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 1:
+                  Pista 1: Muchos atributos de un elemento HTML pueden evaluar scripts en ocurrencia de un evento.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 2:
+                  Pista 2: Un elemento favorito es el boton y un evento preferido es onclick.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 3:
+                  Pista 3: Trata de agregar un elemento entero, al final del dia lo puedes crear a tu gusto sin problema.
                 </p>
               </div>
               <div class="modal-footer">
@@ -136,9 +155,18 @@
                 </div>
                 <div class="modal-body">
                   <p class="text-center m-2">
-                    Texto del nuevo parrafo de contexto aqui.
+                    La configuracion que Flask le da a Jinja2, trae consigo por lo menos 2 vulnerabilidades intrinsecas en cuanto al manejo de XSS, en este ejercicio hemos integrado la primera. Esta vulnerabilidad es la ser susceptible a inyeccion de atributos en HTML. 
                   </p>
                   <p class="text-center m-2">
+                    Nuestra implementación es ligeramente diferente a la típica presentación de esta vulnerabilidad, en el sentido que aqui estamos promoviendo que se integre el elemento completo con atributos trucados con scripts, en lugar de la comun donde un atributo se rellenenario por medio de Flask, con un valor sin comillas, lo cual le permitiria al atacante introducir nuevos atributos al elemento existente y agregar su propio comportamiento.
+                  </p>
+                  <p class="text-center m-2">
+                    Usamos este acercamiento porque insistimos en que nuestra intencion es plantear estos ejercicios para poder ser resueltos en un ambiente de practica inicial, pero enfatizando las instancias en las que ocurren, para poderlas evitar. Como resultado, nosotros tenemos de ejemplo de respuesta el siguiente boton: &lt;button type=submit onclick=alert(document.getElementById("iEscondido").value)&gt;Clave&lt;/button&gt;
+                  </p>
+                  <p class="text-center m-2">
+                    <b>En el caso comun, la mejor medida que tomar seria asegurar que la respuesta que se prepara con el input, estuviera completamente escapada y se comportara por completo como una cadena de caracteres, para evitar introducir funcionalidad inesperada.</b>
+                  </p>
+                  <p class="text-center m-2 text-success">
                     <b>Suerte en los demas ejercicios, y no olvides anotar tu pieza :)</b>
                   </p>
                 </div>

@@ -74,9 +74,34 @@
           <b>Ejercicio</b>
         </p>
         <p class="text-center m-2">
-          Acertijo o descripcion del ejercicio aqui.
-        </p>  
-        <!--HTML especifico al ejercicio, en caso de ser necesario, borrar esta linea al agregar o completar-->
+          Usando un ataque de XSS Reflejado (Reflected), obten la clave recuperando el valor del elemento iEscondido oculto en esta página.
+        </p>
+        <p class="text-center m-2">
+          Consejos: No te olvides del inspector de elementos y la habilidad de modificar valores en el HTML; recuerda que hay multiples maneras de declarar scripts de JavaScript dentro de HTML.
+        </p>
+        <p class="text-center m-2">
+          <b>Condicion adicional: No ver codigo fuente de la pagina para <u>obtener la clave</u> (todo lo demas es justo).</b>
+        </p> 
+
+        <div>
+          <form id="fHola" action="XSS3" class="text-center p-2" method="post" style="position: relative; top: 15%">
+            <label for="iHola" class="form-label text-success"><b>Para que pagina deseas generar el enlace:</b></label>
+            <select name="iHola" id="iHola" form="fHola" class="form-select form-select-md me-2 text-center" required>
+              <option value="/XSS1">XSS1</option>
+              <option value="/XSS2">XSS2</option>
+              <option value="/XSS3">XSS3</option>
+            </select>
+            <br>
+            <button type="submit" class="btn btn-dark">Enviar</button>
+          </form>
+        </div>
+        
+        {% for hola in get_flashed_messages(category_filter=["hola"])%}
+          <p class="text-center m-2 text-success" >
+            <a href="{{hola|safe}}">Tu enlace nuevo</a>
+          </p>
+        {% endfor %}
+        
 
         <!-- Modal de las Pistas -->
         <div class="modal fade" id="modalPistas" tabindex="-1" role="dialog" aria-labelledby="modalPistasLabel" aria-hidden="true">
@@ -90,13 +115,13 @@
                   Resalta con tu cursor la fila de la pista que deseas ver, las pistas estan ordenadas por impacto de menor a mayor (arriba a abajo correspondientemente) para obtener la respuesta. Cuidado a los que desean usar la menor cantidad de pistas posibles que estas tambien estan disponibles sin ocultar dentro del Modal en el codigo fuente de la pagina.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 1:
+                  Pista 1: Alguna vez has escuchado de JavaScript URI? Talvez sea hora de averiguar :)
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 2:
+                  Pista 2: El atributo href es compatible con Javascript URI...
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 3:
+                  Pista 3: Por si no lo has tratado ya, recuerda que puedes cambiar el contenido del html usando el inspector de elementos de tu navegador.
                 </p>
               </div>
               <div class="modal-footer">
@@ -115,7 +140,7 @@
           <button type="submit" class="btn btn-dark">Enviar</button>
         </form>
         <p class="text-center" style="margin: 20px; position: relative; top:10%">{% for ayuda in get_flashed_messages(category_filter=["ayuda"])%}{{ayuda}}{% endfor %}<p>
-
+        <input id="iEscondido" value="la clave es 5fcfcb7df376059d0075cb892b2cc37f" hidden>
       </div>
       <div class="float-child overflow-hidden" id="divRecompensa">
         <p class="text-center m-2">
@@ -136,9 +161,15 @@
                 </div>
                 <div class="modal-body">
                   <p class="text-center m-2">
-                    Texto del nuevo parrafo de contexto aqui.
+                    Una segunda vulnerabilidad intrinseca de Jinja2 con respecto a manejo de XSS, es que los elementos de &lt;a&gt; tienen un atributo href que es compatible con la estructura de JavaScript URI. Eso quiere decir, que en instancias donde se puede agregar un elemento &lt;a&gt;, con un script como el siguiente que es nuestro ejemplo para resolver esta ejercicio, <b>javascript:alert(document.getElementById('iEscondido').value);</b>, o en este caso donde explicitamente estamos rellenando el atributo href de un elemento &lt;a&gt; con el value del elemento seleccionado (que se puede cambiar con el inspector), se puede forzar comportamiento arbitrario.
                   </p>
                   <p class="text-center m-2">
+                    Mas que en otros ejercicios, aqui enfatizamos sustancialmente que este no es un ejemplo realista, ya que no va a ser tipico en casi ninguna circunstancia que se pida rellenar el href de un elemento &lt;a&gt;, pero al mismo tiempo no queriamos que el ejercicio fuera obligado a indicar que se tendria que insertar un elemento &lt;a&gt; con el elemento href usando URI de JavaScript (aunque la segunda mitad si tuvo que incluirse como minimo en las pistas).
+                  </p>
+                  <p class="text-center m-2">
+                    <b>El ejemplo mas tipico de ataque usando este acercamiento seria que el atacante redactara el elemento completo, junto con el atributo href, y lo ingresara en un input mas como el del ejercicio XSS2. La medida adecuada para manejar esta situacion en el estado de nuestro ejercicio, seria no crear un campo que modifica un atributo especifico (href) de un elemento &lt;a&gt;. En el caso comun, la mejor medida que tomar seria asegurar que la respuesta que se prepara con el input, estuviera completamente escapada y se comportara por completo como una cadena de caracteres, para evitar introducir funcionalidad inesperada.
+                  </p>
+                  <p class="text-center m-2 text-success">
                     <b>Suerte en los demas ejercicios, y no olvides anotar tu pieza :)</b>
                   </p>
                 </div>

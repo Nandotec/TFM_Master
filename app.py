@@ -58,12 +58,6 @@ def fugas3():
 	clave="f457c545a9ded88f18ecee47145a72c0"
 	return render_template(carga(2, "fugas", "3", clave), chest=recompensa(clave))
 
-#Fugas de Informacion 4
-@app.route("/fugas4", methods=["POST", "GET"])
-def fugas4():
-	clave="32bb90e8976aab5298d5da10fe66f21d"
-	return render_template(carga(3, "fugas", "4", clave), chest=recompensa(clave))
-
 #SQL Injection 1
 @app.route("/SQLi1", methods=["POST", "GET"])
 def SQLi1():
@@ -85,12 +79,6 @@ def SQLi3():
 	clave="738c8372fab9160336f3daad7fcc7e2a"
 	return render_template(carga(6, "SQLi", "3", clave), chest=recompensa(clave))
 
-#SQL Injection 4
-@app.route("/SQLi4", methods=["POST", "GET"])
-def SQLi4():
-	clave="66f041e16a60928b05a7e228a89c3799"
-	return render_template(carga(7, "SQLi", "4", clave), chest=recompensa(clave))
-
 #Cross Site Scripting 1
 @app.route("/XSS1", methods=["POST", "GET"])
 def XSS1():
@@ -101,21 +89,19 @@ def XSS1():
 @app.route("/XSS2", methods=["POST", "GET"])
 def XSS2():
 	clave="d72d187df41e10ea7d9fcdc7f5909205"
-	return render_template(carga(9, "XSS", "2", clave), chest=recompensa(clave))
+	data = request.form.get("iHola")
+	if data != None:
+		flash(data, "hola")
+	return render_template(carga(9, "XSS", "2", clave), chest=recompensa(clave), holaM=data)
 
 #Cross Site Scripting 3
 @app.route("/XSS3", methods=["POST", "GET"])
 def XSS3():
 	clave="5fcfcb7df376059d0075cb892b2cc37f"
-	return render_template(carga(10, "XSS", "3", clave), chest=recompensa(clave))
-
-#Cross Site Scripting 4
-@app.route("/XSS4", methods=["POST", "GET"])
-def XSS4():
-	clave="bba19fea927b71d74e753f2487e107fd"
-	return render_template(carga(11, "XSS", "4", clave), chest=recompensa(clave))
-
-
+	data = request.form.get("iHola")
+	if data != None:
+		flash(data, "hola")
+	return render_template(carga(10, "XSS", "3", clave), chest=recompensa(clave), holaM=data)
 
 #Cookie version
 @app.route("/CSRF1", methods=["POST", "GET"])
@@ -212,15 +198,3 @@ def CSRF1():
 def CSRF2():
 	clave="5b344ac52a0192941b46a8bf252c859c"
 	return render_template(carga(13, "CSRF", "2", clave), chest=recompensa(clave))
-
-#Cross Site Request Forgery 3
-@app.route("/CSRF3", methods=["POST", "GET"])
-def CSRF3():
-	clave="2d917f5d1275e96fd75e6352e26b1387"
-	return render_template(carga(14, "CSRF", "3", clave), chest=recompensa(clave))
-
-#Cross Site Request Forgery 4
-@app.route("/CSRF4", methods=["POST", "GET"])
-def CSRF4():
-	clave="64e4cda19b3f3ea4a7a56b5ba8cc33ca"
-	return render_template(carga(15, "CSRF", "4", clave), chest=recompensa(clave))
