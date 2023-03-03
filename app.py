@@ -36,9 +36,9 @@ def carga(indice, nombre, identificador, clave=0):
 
 """Llamadas por pagina/ejercicio"""
 #Landing Page
-#@app.route("/")
-#def landing():
-	#return render_template(carga(0, "fugas", "1"), chest=recompensa())
+@app.route("/")
+def landing():
+	return render_template("home.html")
 
 #Fugas de Informacion 1
 @app.route("/fugas1", methods=["POST", "GET"])

@@ -77,16 +77,16 @@
           Usando un ataque de XSS Reflejado (Reflected), obten la clave recuperando el valor del elemento iEscondido oculto en esta página.
         </p>
         <p class="text-center m-2">
-          Consejos: No te olvides del inspector de elementos y la habilidad de modificar valores en el HTML; recuerda que hay multiples maneras de declarar scripts de JavaScript dentro de HTML.
+          Consejos: JavaScript se puede usar en formato URI dentro de cadenas.
         </p>
         <p class="text-center m-2">
-          <b>Condicion adicional: No ver codigo fuente de la pagina para <u>obtener la clave</u> (todo lo demas es justo).</b>
+          <b>Condicion adicional: Solo esta permitido ver/modificar el codigo HTML del elemento dropdown &lt;select&gt; con id="iHola" y sus opciones, esta pista es forzosa debido a la naturaleza del ejercicio.</b>
         </p> 
 
         <div>
           <form id="fHola" action="XSS3" class="text-center p-2" method="post" style="position: relative; top: 15%">
             <label for="iHola" class="form-label text-success"><b>Para que pagina deseas generar el enlace:</b></label>
-            <select name="iHola" id="iHola" form="fHola" class="form-select form-select-md me-2 text-center" required>
+            <select id="iHola" name="iHola" form="fHola" class="form-select form-select-md me-2 text-center" required>
               <option value="/XSS1">XSS1</option>
               <option value="/XSS2">XSS2</option>
               <option value="/XSS3">XSS3</option>
@@ -115,10 +115,10 @@
                   Resalta con tu cursor la fila de la pista que deseas ver, las pistas estan ordenadas por impacto de menor a mayor (arriba a abajo correspondientemente) para obtener la respuesta. Cuidado a los que desean usar la menor cantidad de pistas posibles que estas tambien estan disponibles sin ocultar dentro del Modal en el codigo fuente de la pagina.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 1: Alguna vez has escuchado de JavaScript URI? Talvez sea hora de averiguar :)
+                  Pista 1: <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">Mas informacion de URI</a>, pero para javascript basta con empezar tu cadena con javascript:
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 2: El atributo href es compatible con Javascript URI...
+                  Pista 2: El atributo href es una cadena, y ese enlace generado debe tener ese atributo...
                 </p>
                 <p class="text-center m-2 bg-dark">
                   Pista 3: Por si no lo has tratado ya, recuerda que puedes cambiar el contenido del html usando el inspector de elementos de tu navegador.
