@@ -80,7 +80,7 @@
 
         <!-- Pedir el campo -->
         <div>
-          <form id="fsqli01" action="javascript:void(0);" class="text-center p-2" method="post" style="position: relative; top: 15%">
+          <form id="fsqli01" action="/SQLi1" class="text-center p-2" method="post" style="position: relative; top: 15%">
             <label for="isqli01" class="form-label"><b>Número de estudiante:</b></label>
             <input type="text" class="form-control me-2 text-center" id="isqli01" name="isqli01" placeholder="Ingresa el número de estudiante aquí (1-6):" required>
             <br>
@@ -94,9 +94,9 @@
         
         {% for cursor in resultados %}
         <p class="text-center m-2 text-success" >
-            <b>Nombre {{cursor[nombre]}}</b>
-            <b>Apellido {{cursor[apellido]}}</b>
-            <b>Calificación {{cursor[calificacion]}}</b>
+            <b>Nombre {{cursor['nombre']}}</b><br>
+            <b>Apellido {{cursor['apellido']}}</b><br>
+            <b>Calificación {{cursor['calificacion']}}</b><br>
         
        </p>
 
