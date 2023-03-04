@@ -65,7 +65,7 @@ def SQLi1():
 	data = request.form.get("isqli01")
 	if data != None:
 		conn = sqlite3.connect('static/db/SQLI01.db')
-    	conn.row_factory = sqlite3.Row
+		conn.row_factory = sqlite3.Row
     	resultados = conn.execute('SELECT * FROM SALON WHERE id='+data).fetchall()
     	conn.close()
 		return render_template(carga(4, "SQLi", "1", clave), chest=recompensa(clave), resultados=resultados)
