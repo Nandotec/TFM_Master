@@ -64,7 +64,7 @@ def SQLi1():
 	clave="6e1fcd704528ad8bf6d6bbedb9210096"
 	data = request.form.get("isqli01")
 	if data != None:
-		conn = sqlite3.connect('SQLI01.db')
+		conn = sqlite3.connect('static/db/SQLI01.db')
     	conn.row_factory = sqlite3.Row
     	resultados = conn.execute('SELECT * FROM SALON WHERE id='+data).fetchall()
     	conn.close()
