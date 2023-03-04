@@ -41,3 +41,19 @@
 	position:absolute;
 	bottom:0px;
 }
+
+@media screen and (min-width: 700px) {
+  #mediaP {
+    display: none;
+  }
+}
+
+#divHome{
+	float: left;
+	height: 100%;
+	width: 100%;
+	border: 10px solid gray;
+	margin-top: 1px; 
+	background-color: #f2f2f3;
+	position:relative
+}

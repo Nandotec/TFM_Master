@@ -31,7 +31,6 @@
                 <li><a href="/fugas1" class="dropdown-item">Prueba 1</a></li>
                 <li><a href="/fugas2" class="dropdown-item">Prueba 2</a></li>
                 <li><a href="/fugas3" class="dropdown-item">Prueba 3</a></li>
-                <li><a href="/fugas4" class="dropdown-item">Prueba 4</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown m-2">
@@ -42,7 +41,6 @@
                 <li><a href="/SQLi1" class="dropdown-item">Prueba 1</a></li>
                 <li><a href="/SQLi2" class="dropdown-item">Prueba 2</a></li>
                 <li><a href="/SQLi3" class="dropdown-item">Prueba 3</a></li>
-                <li><a href="/SQLi4" class="dropdown-item">Prueba 4</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown m-2">
@@ -53,7 +51,6 @@
                 <li><a href="/XSS1" class="dropdown-item">Prueba 1</a></li>
                 <li><a href="/XSS2" class="dropdown-item">Prueba 2</a></li>
                 <li><a href="/XSS3" class="dropdown-item">Prueba 3</a></li>
-                <li><a href="/XSS4" class="dropdown-item">Prueba 4</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown m-2">
@@ -63,23 +60,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a href="/CSRF1" class="dropdown-item">Prueba 1</a></li>
                 <li><a href="/CSRF2" class="dropdown-item">Prueba 2</a></li>
-                <li><a href="/CSRF3" class="dropdown-item">Prueba 3</a></li>
-                <li><a href="/CSRF4" class="dropdown-item">Prueba 4</a></li>
             </ul>
           </li>
-          <!-- Para agregar una nueva vulnerabilidad, copiar y pegar este segmento (borrar <li> de mas para el numero de ejercicios necesarios)
-          <li class="nav-item dropdown m-2">
-            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              CSRF
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a href="/Vuln1" class="dropdown-item">Prueba 1</a></li>
-                <li><a href="/Vuln2" class="dropdown-item">Prueba 2</a></li>
-                <li><a href="/Vuln3" class="dropdown-item">Prueba 3</a></li>
-                <li><a href="/Vuln4" class="dropdown-item">Prueba 4</a></li>
-            </ul>
-          </li> 
-          -->
         </ul>
       </nav>
     </div>
@@ -92,9 +74,14 @@
           <b>Ejercicio</b>
         </p>
         <p class="text-center m-2">
-          Acertijo o descripcion del ejercicio aqui.
-        </p>  
-        <!--HTML especifico al ejercicio, en caso de ser necesario, borrar esta linea al agregar o completar-->
+          "A veces siento que la gente ahora no se imagina lo que era tener una pantalla pequeña, considerando que el estandar de pantallas modernas no baja de 1920x1080."
+        </p>
+        <p class="text-center m-2">
+          <b>Condicion adicional: No ver codigo fuente de la pagina para resolver este ejercicio.</b>
+        </p>
+        <p id="mediaP" class="text-center m-2 text-success">
+          <b>"Te imaginas usar las paginas modernas con tantas cosas a los costados, viendo constantemente de esta manera? Yo no, pero por tratar de empatizar, aqui esta tu clave: f457c545a9ded88f18ecee47145a72c0"</b>
+        </p>    
 
         <!-- Modal de las Pistas -->
         <div class="modal fade" id="modalPistas" tabindex="-1" role="dialog" aria-labelledby="modalPistasLabel" aria-hidden="true">
@@ -108,13 +95,13 @@
                   Resalta con tu cursor la fila de la pista que deseas ver, las pistas estan ordenadas por impacto de menor a mayor (arriba a abajo correspondientemente) para obtener la respuesta. Cuidado a los que desean usar la menor cantidad de pistas posibles que estas tambien estan disponibles sin ocultar dentro del Modal en el codigo fuente de la pagina.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 1:
+                  Pista 1: Talvez no sea necesario cambiar de pantalla...
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 2:
+                  Pista 2: "Think Big!" dicen siempre. Que tal "Think Small"? 
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 3:
+                  Pista 3: "Que desperdicio tener ese margen blanco en esta aplicacion, bien puedo encoger la ventana para acomodarlo mejor!"
                 </p>
               </div>
               <div class="modal-footer">
@@ -154,9 +141,18 @@
                 </div>
                 <div class="modal-body">
                   <p class="text-center m-2">
-                    Texto del nuevo parrafo de contexto aqui.
+                    Talvez sería incorrecto llamar esta vulnerabilidad una ocurrencia común, pero definitivamente en la realidad moderna es más factible a ocurrir de lo que hubiera sido en el pasado. La cuestión aqui es que las páginas modernas se desarrollan para cubrir un diseño dinámico que mejore el diseño interactivo para el flujo del usuario. Ajustar para ciertos tamaños de pantallas es progresivo y se ve como una cualidad adecuada que tener al momento de incluir todo tipo de computadoras o incluso dispositivos moviles.
                   </p>
                   <p class="text-center m-2">
+                    Durante el proceso de preparar esta aplicación, se tuvo que acomodar varias veces el tamaño de la ventana para poder hacer pruebas de que todo se viera correctamente (a un punto aceptable que no se desvíe del trabajo o resulte en esfuerzo excesivo), y fue de esas instancias de tamaños diferentes de donde surgió esta idea de implementar un ejercicio que visibilizara un elemento solamente en ciertos tamaños, usando la propiedad @media de CSS.
+                  </p>
+                  <p class="text-center m-2">
+                    En un ambiente real, podría ser causa de este problema: estar desarrollando para múltiples tamaños de pantalla, y olvidar actualizar una adecuadamente; hacer una prueba de @media, descartarla, pero olvidar removerla del producto terminado; etc.
+                  </p>
+                  <p class="text-center m-2">
+                    <b>En cuanto a una implementación segura, basta con ser cuidadoso al incluir @media, asegurando que cada condicion diferente de @media que se este manejando tenga la implementación correcta, o por defecto no usarlo a menos que sea necesario.</b>
+                  </p>
+                  <p class="text-center m-2 text-success">
                     <b>Suerte en los demas ejercicios, y no olvides anotar tu pieza :)</b>
                   </p>
                 </div>
