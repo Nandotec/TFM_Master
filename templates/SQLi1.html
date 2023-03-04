@@ -74,8 +74,35 @@
           <b>Ejercicio</b>
         </p>
         <p class="text-center m-2">
-          Acertijo o descripcion del ejercicio aqui.
+          La música y la matemática son lenguajes universales que trascienden el tiempo y la distancia.
+          En este ejercicio debemos encontrar en varias bases de datos, distintos elementos que nos pemitan abrir el cofre del conocimiento.        
         </p>  
+
+        <!-- Pedir el campo -->
+        <div>
+          <form id="fsqli01" action="javascript:void(0);" class="text-center p-2" method="post" style="position: relative; top: 15%">
+            <label for="isqli01" class="form-label"><b>Número de estudiante:</b></label>
+            <input type="text" class="form-control me-2 text-center" id="isqli01" name="isqli01" placeholder="Ingresa el número de estudiante aquí (1-6):" required>
+            <br>
+            <button id="bsqli01" type="submit" class="btn btn-dark">Enviar</button>
+          </form>
+        </div>
+
+        
+        <!-- Presentar los resultados -->
+        <!-- https://www.digitalocean.com/community/tutorials/how-to-use-an-sqlite-database-in-a-flask-application -->
+        
+        {% for cursor in resultados %}
+        <p class="text-center m-2 text-success" >
+            <b>Nombre {{cursor[nombre]}}</b>
+            <b>Apellido {{cursor[apellido]}}</b>
+            <b>Calificación {{cursor[calificacion]}}</b>
+        
+       </p>
+
+
+        {% endfor %}
+
         <!--HTML especifico al ejercicio, en caso de ser necesario, borrar esta linea al agregar o completar-->
 
         <!-- Modal de las Pistas -->
@@ -90,13 +117,13 @@
                   Resalta con tu cursor la fila de la pista que deseas ver, las pistas estan ordenadas por impacto de menor a mayor (arriba a abajo correspondientemente) para obtener la respuesta. Cuidado a los que desean usar la menor cantidad de pistas posibles que estas tambien estan disponibles sin ocultar dentro del Modal en el codigo fuente de la pagina.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 1:
+                  Pista 1: 
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 2:
+                  Pista 2: En el desempeño académico encontrarás la solución.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 3:
+                  Pista 3: 
                 </p>
               </div>
               <div class="modal-footer">
