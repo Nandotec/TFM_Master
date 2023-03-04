@@ -68,8 +68,9 @@ def SQLi1():
     	conn.row_factory = sqlite3.Row
     	resultados = conn.execute('SELECT * FROM SALON WHERE id='+data).fetchall()
     	conn.close()
-	return render_template(carga(4, "SQLi", "1", clave), chest=recompensa(clave), resultados=resultados)
-
+		return render_template(carga(4, "SQLi", "1", clave), chest=recompensa(clave), resultados=resultados)
+	else:
+		return render_template(carga(4, "SQLi", "1", clave), chest=recompensa(clave))
 
 
 #SQL Injection 2
