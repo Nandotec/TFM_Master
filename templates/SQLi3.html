@@ -74,8 +74,38 @@
           <b>Ejercicio</b>
         </p>
         <p class="text-center m-2">
-          Acertijo o descripcion del ejercicio aqui.
+          "La <i>union</i> hace la fuerza."
         </p>  
+        <p class="text-center m-2">
+        <i>Es altamente recomendable leer la primera pista.</i>
+        </p>  
+
+
+  <!-- Pedir el campo -->
+        <div>
+          <form id="fsqli03" action="/SQLi3" class="text-center p-2" method="post" style="position: relative; top: 15%">
+            <label for="isqli01" class="form-label"><b>Número de estudiante:</b></label>
+            <input type="text" class="form-control me-2 text-center" id="isqli03" name="isqli03" placeholder="Ingresa el número de estudiante aquí (1-6):" required>
+            <br>
+            <button id="bsqli01" type="submit" class="btn btn-dark">Enviar</button>
+          </form>
+        </div>
+
+        
+        <!-- Presentar los resultados -->
+        <!-- https://www.digitalocean.com/community/tutorials/how-to-use-an-sqlite-database-in-a-flask-application -->
+        
+        <div class="overflow-auto" style="height: 350px;">
+        {% for cursor in resultados %}
+        <p class="text-center m-2 text-primary" >
+              <b>Nombre: {{cursor['nombre']}}</b><br>
+              <b>Apellido: {{cursor['apellido']}}</b><br>
+              <b>Calificación: {{cursor['calificacion']}}</b><br>        
+       </p>
+        {% endfor %}
+       </div>
+
+
         <!--HTML especifico al ejercicio, en caso de ser necesario, borrar esta linea al agregar o completar-->
 
         <!-- Modal de las Pistas -->
@@ -90,13 +120,16 @@
                   Resalta con tu cursor la fila de la pista que deseas ver, las pistas estan ordenadas por impacto de menor a mayor (arriba a abajo correspondientemente) para obtener la respuesta. Cuidado a los que desean usar la menor cantidad de pistas posibles que estas tambien estan disponibles sin ocultar dentro del Modal en el codigo fuente de la pagina.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 1:
+                  Pista 1: Lee detenidamente otra vez el error del segundo ejercicio.
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 2:
+                  Pista 2: ¿Has probado el payload que usaste para resolver el primer ejercicio?
                 </p>
                 <p class="text-center m-2 bg-dark">
-                  Pista 3:
+                  Pista 3: La consulta solo trae tres columnas por defecto.
+                </p>                
+                <p class="text-center m-2 bg-dark">
+                  Pista 4: Selecciona todas las filas de la union de esta tabla contra si misma, haciendo referencia a los campos que no estan incluidos en la consulta original. Si no sabes la tabla, ve pista 1. Si no sabes los campos, ve pista 2. 
                 </p>
               </div>
               <div class="modal-footer">
@@ -136,7 +169,11 @@
                 </div>
                 <div class="modal-body">
                   <p class="text-center m-2">
-                    Texto del nuevo parrafo de contexto aqui.
+                    De los tres ejercicios, este resultó el más difícil de codificar. En el módulo aprendimos a explotar la vulnerabilidad UNION para acceder de forma no autorizada a las tablas de control del sistema de gestión de BBDD. Ya que SQLite es una base de datos muy sencila y que no utiliza este tipo de tablas para llevar - por ejemplo - controles de usuarios que son los principales objetivos en un ataque de este tipo (para lograr escalamiento de privilegios).
+                </p>
+                <p class="text-center m-2">
+                    Fue especialmente retador dar suficientes pistas al usuario, para que entendiera que había más campos en la BBDD que los que se mostraban. SQLite no permite el uso de indices a los campos, lo cual nos limitó.
+                    Comandos de la forma SELECT 1,2,3 from BBDD no son válidos, así que forzosamente teníamos que darle al usuario los nombres de los campos para que pudiera continuar el ejercicio. La clave está escondida en el último campo de la BBDD (tesoro), en un registro que no tiene un identificador entre 1-6. 
                   </p>
                   <p class="text-center m-2">
                     <b>Suerte en los demas ejercicios, y no olvides anotar tu pieza :)</b>

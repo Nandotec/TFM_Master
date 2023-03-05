@@ -62,22 +62,50 @@ def fugas3():
 @app.route("/SQLi1", methods=["POST", "GET"])
 def SQLi1():
 	clave="6e1fcd704528ad8bf6d6bbedb9210096"
-	return render_template(carga(4, "SQLi", "1", clave), chest=recompensa(clave))
+	data = request.form.get("isqli01")
+	if data != None:
+		conn = sqlite3.connect('static/db/SQLI01.db')
+		conn.row_factory = sqlite3.Row
+		resultados = conn.execute('SELECT * FROM SALON WHERE id='+data).fetchall()
+		conn.close()
+		return render_template(carga(4, "SQLi", "1", clave), chest=recompensa(clave), resultados=resultados)
+	else:
+		return render_template(carga(4, "SQLi", "1", clave), chest=recompensa(clave))
+
 
 #SQL Injection 2
 @app.route("/SQLi2", methods=["POST", "GET"])
 def SQLi2():
 	clave="7dff51ca8eb990122513f24ffdaa4d9a"
-	#conexion= conexion_db()
-	#posts = conexion.execute('SELECT * FROM posts').fetchall()
-	#conexion.close()
-	return render_template(carga(5, "SQLi", "2", clave), chest=recompensa(clave), posts=posts)
+	data = request.form.get("isqli02")
+	if data != None:
+		conn = sqlite3.connect('static/db/SQLI02.db')
+		conn.row_factory = sqlite3.Row
+		try:
+			resultados = conn.execute('SELECT * FROM SALON WHERE id='+data).fetchall()
+			flash("Success", "SQLSuccess")
+			return render_template(carga(5, "SQLi", "2", clave), chest=recompensa(clave), resultados=resultados)
+		except sqlite3.DatabaseError:
+			flash("Database error: No elements found for id=" + data + " for table SALON, check syntax. Error code:" + clave, "SQLError")
+			return render_template(carga(5, "SQLi", "2", clave), chest=recompensa(clave))
+
+		conn.close()		
+	else:
+		return render_template(carga(5, "SQLi", "2", clave), chest=recompensa(clave))
 
 #SQL Injection 3
 @app.route("/SQLi3", methods=["POST", "GET"])
 def SQLi3():
 	clave="738c8372fab9160336f3daad7fcc7e2a"
-	return render_template(carga(6, "SQLi", "3", clave), chest=recompensa(clave))
+	data = request.form.get("isqli03")
+	if data != None:
+		conn = sqlite3.connect('static/db/SQLI03.db')
+		conn.row_factory = sqlite3.Row
+		resultados = conn.execute('SELECT nombre,apellido,calificacion FROM SALON WHERE id='+data).fetchall()
+		conn.close()
+		return render_template(carga(6, "SQLi", "3", clave), chest=recompensa(clave), resultados=resultados)
+	else:
+		return render_template(carga(6, "SQLi", "3", clave), chest=recompensa(clave))
 
 #Cross Site Scripting 1
 @app.route("/XSS1", methods=["POST", "GET"])
