@@ -169,10 +169,11 @@
                 </div>
                 <div class="modal-body">
                   <p class="text-center m-2">
-                    De los tres ejercicios, este resultó el más difícil de codificar. En el módulo aprendimos a explotar la vulnerabilidad UNION para acceder de forma no autorizada a las tablas de control del sistema de gestión de BBDD. Ya que SQLLite es una base de datos muy sencila y que no utiliza este tipo de tablas para llevar - por ejemplo - controles de usuarios que son los principales objetivos en un ataque de este tipo (para lograr escalamiento de privilegios).
-
-                    Fue especialmente retador dar suficientes pistas al usuario, para que entendiera que había más campos en la BBDD que los que se mostraban. SQLLite no permite el usuario de indices a los campos lo que nos limitó.
-                    Comandos de la forma SELECT 1,2,3 from BBDD no son válidos, así que forzosamente teníamos que darle al usuario los nombres de los campos para que pudiera continuar el ejercicio. La clave está escondida en el último campo de la BBDD (tesoro). 
+                    De los tres ejercicios, este resultó el más difícil de codificar. En el módulo aprendimos a explotar la vulnerabilidad UNION para acceder de forma no autorizada a las tablas de control del sistema de gestión de BBDD. Ya que SQLite es una base de datos muy sencila y que no utiliza este tipo de tablas para llevar - por ejemplo - controles de usuarios que son los principales objetivos en un ataque de este tipo (para lograr escalamiento de privilegios).
+                </p>
+                <p class="text-center m-2">
+                    Fue especialmente retador dar suficientes pistas al usuario, para que entendiera que había más campos en la BBDD que los que se mostraban. SQLite no permite el uso de indices a los campos, lo cual nos limitó.
+                    Comandos de la forma SELECT 1,2,3 from BBDD no son válidos, así que forzosamente teníamos que darle al usuario los nombres de los campos para que pudiera continuar el ejercicio. La clave está escondida en el último campo de la BBDD (tesoro), en un registro que no tiene un identificador entre 1-6. 
                   </p>
                   <p class="text-center m-2">
                     <b>Suerte en los demas ejercicios, y no olvides anotar tu pieza :)</b>
