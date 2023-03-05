@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SQLi 2</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   </head>
   <body style="height:745px">
@@ -12,13 +13,13 @@
       <a href="#" class="navbar-brand mb-0 h1">
         <img class="d-inline m-2 align-top" src="https://aula.campusciberseguridad.com/pluginfile.php?file=%2F1%2Ftheme_moove%2Flogo%2F1671714533%2Fciberseguridad%20vertical%20bicolor%281%29.png" width="30" height="30">
       </a>
-      <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler m-2" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button type="button" data-bs-toggle="collapse" data-bs-target="#barraNavegacion" class="navbar-toggler m-2" aria-controls="barraNavegacion" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" id="barraNavegacion">
         <ul class="navbar-nav">
           <li class="nav-item active m-2">
-            <a href="#" class="nav-link active">
+            <a href="/" class="nav-link active">
               Home
             </a>
           </li>
@@ -65,60 +66,132 @@
       </nav>
     </div>
     <div class="container overflow-hidden" style="height:670px;">
-      <div class="float-child" style="float: left; height:100%; width: 75%; border: 10px solid gray; border-right-width: 5px; margin-top: 1px;  background-color: #f2f2f3">
+      <div class="float-child" id="divEjercicio">
+        <button id="btnPistas" type="button" class="btn btn-dark text-center m-2" data-bs-toggle="modal" data-bs-target="#modalPistas">
+          Pistas
+        </button>
         <p class="text-center m-2" style="font-size: 20px ; font-weight: bold">
           <b>Ejercicio</b>
         </p>
-        
-          {% for assignment in get_flashed_messages(category_filter=["assignment"])%}
-          <p class="text-center m-2">
-            {{assignment}}
-          </p>
-          {% endfor %} 
+        <p class="text-center m-2">
+          "Es importante aprender de nuestros errores."       
+        </p>  
 
-          {% for post in posts %}
-            <div class='post'>
-              <p>{{post['created']}}</p>
-              <h2>{{post['title']}}</h2>
-              <p>{{post['content']}}</p>
+
+        <!-- Pedir el campo -->
+        <div>
+          <form id="fsqli02" action="/SQLi2" class="text-center p-2" method="post" style="position: relative; top: 15%">
+            <label for="isqli02" class="form-label"><b>Número de estudiante:</b></label>
+            <input type="text" class="form-control me-2 text-center" id="isqli02" name="isqli02" placeholder="Ingresa el número de estudiante aquí (1-6):" required>
+            <br>
+            <button id="bsqli02" type="submit" class="btn btn-dark">Enviar</button>
+          </form>
+        </div>
+
+        
+        <!-- Presentar los resultados -->
+        <!-- https://www.digitalocean.com/community/tutorials/how-to-use-an-sqlite-database-in-a-flask-application -->
+        
+         {% for cursor in get_flashed_messages(category_filter=["SQLSuccess"])%}
+        <div class="overflow-auto" style="height: 350px;">
+        {% for cursor in resultados %}
+        <p class="text-center m-2 text-primary" >
+              <b>Nombre: {{cursor['nombre']}}</b><br>
+              <b>Apellido: {{cursor['apellido']}}</b><br>
+              <b>Calificación: {{cursor['calificacion']}}</b><br>        
+       </p>
+        {% endfor %}
+       </div>
+        {% endfor %}
+
+
+
+       
+      {% for cursor in get_flashed_messages(category_filter=["SQLError"])%}
+      <p class="text-center m-2 text-danger">
+        {{cursor}}
+      </p>
+       {% endfor %}
+
+     
+        <!--HTML especifico al ejercicio, en caso de ser necesario, borrar esta linea al agregar o completar-->
+
+        <!-- Modal de las Pistas -->
+        <div class="modal fade" id="modalPistas" tabindex="-1" role="dialog" aria-labelledby="modalPistasLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalPistasLabel">Pistas</h5>
+              </div>
+              <div class="modal-body">
+                <p class="text-center m-2">
+                  Resalta con tu cursor la fila de la pista que deseas ver, las pistas estan ordenadas por impacto de menor a mayor (arriba a abajo correspondientemente) para obtener la respuesta. Cuidado a los que desean usar la menor cantidad de pistas posibles que estas tambien estan disponibles sin ocultar dentro del Modal en el codigo fuente de la pagina.
+                </p>
+                <p class="text-center m-2 bg-dark">
+                  Pista 1: No te limites al rango sugerido.
+                </p>
+                <p class="text-center m-2 bg-dark">
+                  Pista 2: Me parece raro ese código de error. 
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
             </div>
-          {% endfor %}
+          </div>
+        </div>
       </div>
-      <div class="d-block float-child overflow-hidden" style="float: left; height:50%; width: 25%; border: 10px solid gray; border-left-width: 5px; border-bottom-width: 5px; margin-top: 1px; background-color: #f2f2f3">
+      <div class="d-block float-child overflow-hidden" id="divRespuesta">
         <form id="fRespuesta" action="SQLi2" class="text-center p-2" method="post" style="position: relative; top: 15%">
           <label for="iRespuesta" class="form-label"><b>Respuesta</b></label>
           <input type="text" class="form-control me-2 text-center" id="iRespuesta" name="iRespuesta" placeholder="Ingresa la clave...">
           <label class="control-label text-danger" for="iRespuesta">{% for error in get_flashed_messages(category_filter=["error"])%}{{error}}{% endfor %}</label>
           <br><br>
-          <button id="trueButton" type="submit" class="btn btn-dark" style="visibility: hidden;">Enviar</button>
-          <br>
-          <button id="fakeButton" type="button" class="btn btn-primary" onclick="displayShow()">Enviar</button>
+          <button type="submit" class="btn btn-dark">Enviar</button>
         </form>
-        <p class="text-center" style="margin: 20px; position: relative; top:10%">{% for waiting in get_flashed_messages(category_filter=["waiting"])%}{{waiting}}{% endfor %}<p>
+        <p class="text-center" style="margin: 20px; position: relative; top:10%">{% for ayuda in get_flashed_messages(category_filter=["ayuda"])%}{{ayuda}}{% endfor %}<p>
 
       </div>
-      <div class="float-child overflow-hidden" style="float: left; height:50%; width: 25%; border: 10px solid gray; border-left-width: 5px; border-top-width: 5px;background-color: #f2f2f3">
+      <div class="float-child overflow-hidden" id="divRecompensa">
         <p class="text-center m-2">
           <b>Recompensa</b>
         </p>
         <p class="text-center">
-          <img class="d-inline m-4 align-top" src="{{ url_for('static', filename=chest) }}" width="60%" height="60%">
+          <img class="d-inline m-4 align-top" src="{{ url_for('static', filename=chest) }}" width="50%" height="50%">
         </p>
+        {% for recompensa in get_flashed_messages(category_filter=["recompensa"])%}
         <p class="text-center text-success" style="margin: 10px">
-          <b>{% for reward in get_flashed_messages(category_filter=["reward"])%}
-            {{reward}}
-          <b>{% endfor %}
+          <b>{{recompensa}}</b>
+          <!-- Modal del Contexto -->
+          <div class="modal fade" id="modalContexto" tabindex="-1" role="dialog" aria-labelledby="modalContextoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalContextoLabel">Detalle del Contexto</h5>
+                </div>
+                <div class="modal-body">
+                  <p class="text-center m-2">
+                      Para este ejercicio, decidimos tomar ventaja de una intencionalmente pobre validación de campos. El ejercicio permita la misma explotación que el caso anterior, sin embargo la respuesta no se encuentra en la base de datos. Investigamos los mecanismos de control de errores de la base de datos SQLLite y buscamos la forma de provocar una falla. Invitamos al usuario a provocar un error el cual le permitiera llegar a la respuesta.
+                  </p>
+                  <p class="text-center m-2">
+                    <b>Suerte en los demas ejercicios, y no olvides anotar tu pieza :)</b>
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </p>
+        <div style="display:flex; justify-content: center;">
+          <button id="btnContexto" type="button" class="btn btn-success text-center m-2" data-bs-toggle="modal" data-bs-target="#modalContexto">
+            Detalle
+          </button>
+        </div>
+          {% endfor %}
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script>
-      function displayShow() { 
-         if(document.getElementById("iRespuesta").value === "d82c8d1619ad8176d665453cfb2e55f0"){
-            document.getElementById("trueButton").style.visibility = "visible";
-            document.getElementById("fakeButton").style.visibility = "hidden";
-         }  
-      }   
-    </script>
   </body>
 </html>
