@@ -81,7 +81,6 @@
         <p class="text-center m-2">
           <b>Condicion adicional: No ver codigo fuente de la pagina para resolver este ejercicio.</b>
         </p>
-        <!--HTML especifico al ejercicio, en caso de ser necesario, borrar esta linea al agregar o completar-->
 
         <div>
           <form id="fHola" action="javascript:void(0);" class="text-center p-2" method="post" style="position: relative; top: 15%">
@@ -93,8 +92,6 @@
         </div>
 
         <p id="pHola" class="text-center m-2 text-success" style="font-weight: bold;"></p>
-
-        <input id="iEscondido" value="la clave es a684eceee76fc522773286a895bc8436" hidden>
 
 
         <!-- Modal de las Pistas -->
@@ -140,12 +137,14 @@
         <p class="text-center m-2">
           <b>Recompensa</b>
         </p>
+        <input id="iEscondido" value="la clave es 871c14878fa75bc327ba87d2d284d596" hidden>
         <p class="text-center">
           <img class="d-inline m-4 align-top" src="{{ url_for('static', filename=chest) }}" width="50%" height="50%">
         </p>
         {% for recompensa in get_flashed_messages(category_filter=["recompensa"])%}
         <p class="text-center text-success" style="margin: 10px">
           <b>{{recompensa}}</b>
+          
           <!-- Modal del Contexto -->
           <div class="modal fade" id="modalContexto" tabindex="-1" role="dialog" aria-labelledby="modalContextoLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">

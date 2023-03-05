@@ -194,9 +194,19 @@
                 </div>
                 <div class="modal-body">
                   <p class="text-center m-2">
-                    Texto del nuevo parrafo de contexto aqui.
+                    Las vulnerabilidades a CSRF estan comunmente afiliadas con formularios de sesión, y requieren tres elementos particulares para poder manifestarse: debe haber una acción relevante que sea utilizable en ciertas condiciones (o por ciertos usuarios) que un atacante pueda tener una razón de provocar; el manejo de sesiones debe hacerse por medio de cookies únicamente; todos los parámetros de petición son predecibles (<a href="https://portswigger.net/web-security/csrf">más información</a>).
                   </p>
                   <p class="text-center m-2">
+                    En este ejercicio, la accion relevante es un cambio de contraseña por medio de un formulario, que no es visible por medio del usuario admin, pero se realiza por medio de parametros en la URL; el manejo de sesiones se realiza con cookies para la sesión; los parametros de la petición no requieren la contraseña previa, y recuperan el usuario de la sesión al momento de hacer el cambio, al fin, ningun parametro de la url es impredecible.
+                  </p>
+                  <p class="text-center m-2">
+                    Como probablemente habrán realizado, al traer el URL despues de realizar un cambio en guest, iniciando sesión luego como admin, e ingresando la url en el navegador mientras está iniciada la sesión de admin, cambia la contraseña de admin y hace visible la clave de la respuesta en el usuario administrador.
+                  </p>
+                  <p class="text-center m-2">
+                    Para evitar esta vulnerabilidad se puede manejar elementos como un CSRF Token, cuyo proposito es introducir un parámetro de petición impredecible a cada sesión iniciada o incluso cada página individual visitada, de manera aleatoria o diseñar la página para manejar las sesiones de manera no exclusiva por medio del uso de cookies, sino tener habilitado un elemento hibrido que oculte información de sesión.
+                    Como toda otra vulnerabilidad claro, tambien esta la opción dentro de la posibilidad, de no incluir acciones que serían vectores de ataque con valor, pero este depende fuertemente de la aplicación que se está desarrollando.
+                  </p>
+                  <p class="text-center m-2 text-success">
                     <b>Suerte en los demas ejercicios, y no olvides anotar tu pieza :)</b>
                   </p>
                 </div>

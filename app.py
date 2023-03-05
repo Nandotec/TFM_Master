@@ -5,7 +5,7 @@ from flask import Flask, flash, redirect, render_template, request, session, mak
 """Variables"""
 app = Flask(__name__)
 app.secret_key = "MCS10AED_JJ"
-piezas = ["3f", "53", "49", "72", "f4", "0f", "9b", "58", "54", "07", "3c", "2e", "4e", "ea", "fe", "f6"]
+piezas = ["3f5", "349", "72f", "40f", "9b5", "854", "073", "c2e", "4ee", "afe", "f6"]
 
 """Funciones Globales"""
 #Establecer conexion a la base de datos
@@ -43,40 +43,40 @@ def landing():
 #Fugas de Informacion 1
 @app.route("/fugas1", methods=["POST", "GET"])
 def fugas1():
-	clave="848d85f801e989c68a4df01d9d4c1e9e"
+	clave="a92263c38f1d4427e98d0a4a163d5c97"
 	return render_template(carga(0, "fugas", "1", clave), chest=recompensa(clave))
 
 #Fugas de Informacion 2
 @app.route("/fugas2", methods=["POST", "GET"])
 def fugas2():
-	clave="d82c8d1619ad8176d665453cfb2e55f0"
+	clave="0bb4aec1710521c12ee76289d9440817"
 	return render_template(carga(1, "fugas", "2", clave), chest=recompensa(clave))
 
 #Fugas de Informacion 3
 @app.route("/fugas3", methods=["POST", "GET"])
 def fugas3():
-	clave="f457c545a9ded88f18ecee47145a72c0"
+	clave="8b3491a66166e4ae03787085b30896c1"
 	return render_template(carga(2, "fugas", "3", clave), chest=recompensa(clave))
 
 #SQL Injection 1
 @app.route("/SQLi1", methods=["POST", "GET"])
 def SQLi1():
-	clave="6e1fcd704528ad8bf6d6bbedb9210096"
+	clave="d5233f38eed5ca5a5fe20a3da852a3cb"
 	data = request.form.get("isqli01")
 	if data != None:
 		conn = sqlite3.connect('static/db/SQLI01.db')
 		conn.row_factory = sqlite3.Row
 		resultados = conn.execute('SELECT * FROM SALON WHERE id='+data).fetchall()
 		conn.close()
-		return render_template(carga(4, "SQLi", "1", clave), chest=recompensa(clave), resultados=resultados)
+		return render_template(carga(3, "SQLi", "1", clave), chest=recompensa(clave), resultados=resultados)
 	else:
-		return render_template(carga(4, "SQLi", "1", clave), chest=recompensa(clave))
+		return render_template(carga(3, "SQLi", "1", clave), chest=recompensa(clave))
 
 
 #SQL Injection 2
 @app.route("/SQLi2", methods=["POST", "GET"])
 def SQLi2():
-	clave="7dff51ca8eb990122513f24ffdaa4d9a"
+	clave="5eaababec40751903437c1ee9c4f7e94"
 	data = request.form.get("isqli02")
 	if data != None:
 		conn = sqlite3.connect('static/db/SQLI02.db')
@@ -84,58 +84,58 @@ def SQLi2():
 		try:
 			resultados = conn.execute('SELECT * FROM SALON WHERE id='+data).fetchall()
 			flash("Success", "SQLSuccess")
-			return render_template(carga(5, "SQLi", "2", clave), chest=recompensa(clave), resultados=resultados)
+			return render_template(carga(4, "SQLi", "2", clave), chest=recompensa(clave), resultados=resultados)
 		except sqlite3.DatabaseError:
 			flash("Database error: No elements found for id=" + data + " for table SALON, check syntax. Error code:" + clave, "SQLError")
-			return render_template(carga(5, "SQLi", "2", clave), chest=recompensa(clave))
+			return render_template(carga(4, "SQLi", "2", clave), chest=recompensa(clave))
 
 		conn.close()		
 	else:
-		return render_template(carga(5, "SQLi", "2", clave), chest=recompensa(clave))
+		return render_template(carga(4, "SQLi", "2", clave), chest=recompensa(clave))
 
 #SQL Injection 3
 @app.route("/SQLi3", methods=["POST", "GET"])
 def SQLi3():
-	clave="738c8372fab9160336f3daad7fcc7e2a"
+	clave="f7e9050c92a851b0016442ab604b0488"
 	data = request.form.get("isqli03")
 	if data != None:
 		conn = sqlite3.connect('static/db/SQLI03.db')
 		conn.row_factory = sqlite3.Row
 		resultados = conn.execute('SELECT nombre,apellido,calificacion FROM SALON WHERE id='+data).fetchall()
 		conn.close()
-		return render_template(carga(6, "SQLi", "3", clave), chest=recompensa(clave), resultados=resultados)
+		return render_template(carga(5, "SQLi", "3", clave), chest=recompensa(clave), resultados=resultados)
 	else:
-		return render_template(carga(6, "SQLi", "3", clave), chest=recompensa(clave))
+		return render_template(carga(5, "SQLi", "3", clave), chest=recompensa(clave))
 
 #Cross Site Scripting 1
 @app.route("/XSS1", methods=["POST", "GET"])
 def XSS1():
-	clave="a684eceee76fc522773286a895bc8436"
-	return render_template(carga(8, "XSS", "1", clave), chest=recompensa(clave))
+	clave="871c14878fa75bc327ba87d2d284d596"
+	return render_template(carga(6, "XSS", "1", clave), chest=recompensa(clave))
 
 #Cross Site Scripting 2
 @app.route("/XSS2", methods=["POST", "GET"])
 def XSS2():
-	clave="d72d187df41e10ea7d9fcdc7f5909205"
+	clave="d8ae1f0b868d69547dd6377f7538eec6"
 	data = request.form.get("iHola")
 	if data != None:
 		flash(data, "hola")
-	return render_template(carga(9, "XSS", "2", clave), chest=recompensa(clave), holaM=data)
+	return render_template(carga(7, "XSS", "2", clave), chest=recompensa(clave), holaM=data)
 
 #Cross Site Scripting 3
 @app.route("/XSS3", methods=["POST", "GET"])
 def XSS3():
-	clave="5fcfcb7df376059d0075cb892b2cc37f"
+	clave="625f96daee918472f22d00a89da74b55"
 	data = request.form.get("iHola")
 	if data != None:
 		flash(data, "hola")
-	return render_template(carga(10, "XSS", "3", clave), chest=recompensa(clave), holaM=data)
+	return render_template(carga(8, "XSS", "3", clave), chest=recompensa(clave), holaM=data)
 
 #Cookie version
 @app.route("/CSRF1", methods=["POST", "GET"])
 def CSRF1():
 	#"Base de Datos Hard Code"
-	clave="aea07c4d3d1709313c4bb2d07a47027d"
+	clave="9972fa89a49bd697185da4788172a1a8"
 	cAdminOriginal="e661e42b6cd1a627512d70462074fa22"
 
 	#Interacciones con botones
@@ -149,7 +149,7 @@ def CSRF1():
 		flash(request.cookies.get('guestpwd'), "guestpwd")
 		flash(request.cookies.get('adminpwd'), "adminpwd")
 		flash("login", "display")
-		response = make_response(render_template(carga(12, "CSRF", "1", clave), chest=recompensa(clave)))
+		response = make_response(render_template(carga(9, "CSRF", "1", clave), chest=recompensa(clave)))
 		response.set_cookie('username', "0", max_age=0)
 		return response
 
@@ -166,8 +166,8 @@ def CSRF1():
 		else:
 			flash(dLogin, "session")
 		if dLogin == "admin" and dPassword != cAdminOriginal:
-			flash("Parece que la contraseña cambio :) Clave del reto: " + "aea07c4d3d1709313c4bb2d07a47027d", "clave")
-		response = make_response(render_template(carga(12, "CSRF", "1", clave), chest=recompensa(clave)))
+			flash("Parece que la contraseña cambio :) Clave del reto: " + "9972fa89a49bd697185da4788172a1a8", "clave")
+		response = make_response(render_template(carga(9, "CSRF", "1", clave), chest=recompensa(clave)))
 		response.set_cookie('username', dLogin, max_age=1800)
 
 		return response
@@ -187,8 +187,8 @@ def CSRF1():
 		flash(request.cookies.get('username'), "user")
 		flash(dURLpwd, "password")
 		if request.cookies.get('username') == "admin" and dURLpwd != cAdminOriginal:
-			flash("Parece que la contraseña cambio :) Clave del reto: " + "aea07c4d3d1709313c4bb2d07a47027d", "clave")
-		response = make_response(render_template(carga(12, "CSRF", "1", clave), chest=recompensa(clave)))
+			flash("Parece que la contraseña cambio :) Clave del reto: " + "9972fa89a49bd697185da4788172a1a8", "clave")
+		response = make_response(render_template(carga(9, "CSRF", "1", clave), chest=recompensa(clave)))
 		if request.cookies.get('username') == "admin":
 			response.set_cookie('adminpwd', dURLpwd, max_age=1800)
 		elif request.cookies.get('username') == "guest":
@@ -202,8 +202,8 @@ def CSRF1():
 			flash("change", "display")
 		flash(request.cookies.get('username'), "session")
 		if request.cookies.get('username') == "admin" and request.cookies.get('adminpwd') != cAdminOriginal:
-			flash("Parece que la contraseña cambio :) Clave del reto: " + "aea07c4d3d1709313c4bb2d07a47027d", "clave")
-		response = make_response(render_template(carga(12, "CSRF", "1", clave), chest=recompensa(clave)))
+			flash("Parece que la contraseña cambio :) Clave del reto: " + "9972fa89a49bd697185da4788172a1a8", "clave")
+		response = make_response(render_template(carga(9, "CSRF", "1", clave), chest=recompensa(clave)))
 		return response
 
 	else:
@@ -214,7 +214,7 @@ def CSRF1():
 		else:
 			flash(request.cookies.get('guestpwd'), "guestpwd")
 			flash(request.cookies.get('adminpwd'), "adminpwd")
-		response = make_response(render_template(carga(12, "CSRF", "1", clave), chest=recompensa(clave)))
+		response = make_response(render_template(carga(9, "CSRF", "1", clave), chest=recompensa(clave)))
 		if request.cookies.get('guestpwd') == None:
 			response.set_cookie('guestpwd', "12345", max_age=1800)
 		if request.cookies.get('adminpwd') == None:
@@ -224,5 +224,5 @@ def CSRF1():
 #Cross Site Request Forgery 2
 @app.route("/CSRF2", methods=["POST", "GET"])
 def CSRF2():
-	clave="5b344ac52a0192941b46a8bf252c859c"
-	return render_template(carga(13, "CSRF", "2", clave), chest=recompensa(clave))
+	clave="64e4cda19b3f3ea4a7a56b5ba8cc33ca"
+	return render_template(carga(10, "CSRF", "2", clave), chest=recompensa(clave))

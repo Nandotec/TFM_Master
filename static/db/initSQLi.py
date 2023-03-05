@@ -22,7 +22,7 @@ cur.execute("INSERT INTO SALON (id, nombre, apellido, calificacion) VALUES (?,?,
 cur.execute("INSERT INTO SALON (id, nombre, apellido, calificacion) VALUES (?,?,?,?)",
             (6, 'John','Williams','100'))
 cur.execute("INSERT INTO SALON (id, nombre, apellido, calificacion) VALUES (?,?,?,?)",
-            (101092022, 'Esta','es la clave','6e1fcd704528ad8bf6d6bbedb9210096'))
+            (101092022, 'Esta','es la clave','d5233f38eed5ca5a5fe20a3da852a3cb'))
 
 connection.commit()
 connection.close()
@@ -77,7 +77,7 @@ cur.execute("INSERT INTO SALON (id, nombre, apellido, calificacion, ciudad, pais
 cur.execute("INSERT INTO SALON (id, nombre, apellido, calificacion, ciudad, pais, tesoro) VALUES (?,?,?,?,?,?,?)",
             (6, 'John','Williams','100','nueva york','eeuu', 'nada'))
 cur.execute("INSERT INTO SALON (id, nombre, apellido, calificacion, ciudad, pais, tesoro) VALUES (?,?,?,?,?,?,?)",
-            (27011756, 'columna 5 - ciudad','columna 6 - pais','columna 7 - tesoro','Esta es','la clave','738c8372fab9160336f3daad7fcc7e2a'))
+            (27011756, 'columna 5 - ciudad','columna 6 - pais','columna 7 - tesoro','Esta es','la clave','f7e9050c92a851b0016442ab604b0488'))
 
 connection.commit()
 connection.close()
